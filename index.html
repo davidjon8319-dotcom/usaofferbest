@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>Rewards Hub | Exclusive Daily Offers</title>
+  <!-- Google Fonts & simple reset -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700&display=swap" rel="stylesheet">
+  <!-- Font Awesome 6 (free icons) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #f5f7fb;
+      color: #1e293b;
+      scroll-behavior: smooth;
+    }
+
+    /* container utility */
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* header / logo area */
+    .header {
+      background: white;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.02), 0 2px 6px rgba(0,0,0,0.05);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(2px);
+      background: rgba(255,255,255,0.96);
+    }
+
+    .logo-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      padding: 16px 0;
+      gap: 16px;
+    }
+
+    .logo-area {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .real-logo {
+      width: 48px;
+      height: 48px;
+      background: linear-gradient(135deg, #1e2b3c, #0f212e);
+      border-radius: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 6px 12px rgba(0,0,0,0.08);
+    }
+
+    .real-logo i {
+      font-size: 28px;
+      color: #FFD966;
+    }
+
+    .logo-text h1 {
+      font-size: 1.7rem;
+      font-weight: 800;
+      letter-spacing: -0.3px;
+      background: linear-gradient(120deg, #0f2b3b, #1f5e6e);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    .logo-text span {
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: #4b6a7c;
+      display: block;
+    }
+
+    .trust-badge {
+      background: #eef2ff;
+      border-radius: 40px;
+      padding: 6px 16px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: #1e40af;
+    }
+
+    .trust-badge i {
+      margin-right: 6px;
+    }
+
+    /* hero section */
+    .hero {
+      text-align: center;
+      padding: 48px 0 32px;
+    }
+
+    .hero h2 {
+      font-size: 2.3rem;
+      font-weight: 800;
+      background: linear-gradient(to right, #0f2b3b, #2b7a62);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+      margin-bottom: 16px;
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      color: #2c4a5c;
+      max-width: 680px;
+      margin: 0 auto 20px;
+    }
+
+    /* dynamic reviews section */
+    .reviews-section {
+      background: white;
+      border-radius: 36px;
+      padding: 28px 24px;
+      margin: 32px 0 40px;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.05);
+      border: 1px solid rgba(0,0,0,0.03);
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      flex-wrap: wrap;
+      margin-bottom: 24px;
+      border-bottom: 2px solid #eef2ff;
+      padding-bottom: 12px;
+    }
+
+    .section-header h3 {
+      font-size: 1.6rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .live-badge {
+      background: #10b981;
+      color: white;
+      font-size: 0.7rem;
+      font-weight: 600;
+      padding: 4px 12px;
+      border-radius: 40px;
+      letter-spacing: 0.5px;
+    }
+
+    .review-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      max-height: 380px;
+      overflow-y: auto;
+      padding-right: 8px;
+    }
+
+    .review-card {
+      background: #fafcff;
+      border-radius: 24px;
+      padding: 16px 20px;
+      border: 1px solid #e9edf2;
+      transition: 0.2s;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.02);
+    }
+
+    .review-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 10px;
+    }
+
+    .avatar {
+      width: 42px;
+      height: 42px;
+      background: #cbdff2;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      color: #1f3b4c;
+    }
+
+    .reviewer {
+      font-weight: 700;
+    }
+
+    .stars {
+      color: #f5b342;
+      letter-spacing: 2px;
+      font-size: 0.85rem;
+    }
+
+    .review-text {
+      color: #334155;
+      margin: 8px 0 6px;
+      font-size: 0.95rem;
+      line-height: 1.4;
+    }
+
+    .verified {
+      font-size: 0.7rem;
+      color: #10b981;
+      font-weight: 500;
+    }
+
+    /* offers grid */
+    .offers-title {
+      margin: 48px 0 24px;
+      font-size: 1.9rem;
+      font-weight: 700;
+      text-align: center;
+    }
+
+    .offers-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 24px;
+      margin-bottom: 50px;
+    }
+
+    .offer-card {
+      background: white;
+      border-radius: 28px;
+      padding: 20px;
+      transition: all 0.2s ease;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.03);
+      border: 1px solid #eef2f8;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .offer-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 20px 30px -12px rgba(0,0,0,0.12);
+      border-color: #cbdff2;
+    }
+
+    .offer-brand {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+
+    .brand-icon {
+      background: #f1f5f9;
+      padding: 8px 12px;
+      border-radius: 40px;
+      font-weight: 600;
+      font-size: 0.8rem;
+    }
+
+    .prize {
+      font-size: 1.8rem;
+      font-weight: 800;
+      margin: 12px 0;
+      color: #0b3b3f;
+    }
+
+    .prize small {
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: #4f6f7f;
+    }
+
+    .offer-desc {
+      color: #4b5b6c;
+      margin-bottom: 20px;
+      font-size: 0.9rem;
+    }
+
+    .claim-btn {
+      background: #0f2b3b;
+      color: white;
+      border: none;
+      padding: 12px 0;
+      border-radius: 60px;
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.2s;
+      margin-top: auto;
+      text-align: center;
+      display: inline-block;
+      text-decoration: none;
+    }
+
+    .claim-btn:hover {
+      background: #1f5a6e;
+      transform: scale(0.98);
+    }
+
+    .fine-print {
+      text-align: center;
+      font-size: 0.7rem;
+      color: #6b7c8f;
+      margin: 40px 0 30px;
+    }
+
+    footer {
+      background: #0e1e28;
+      color: #b9cfdf;
+      padding: 32px 0;
+      text-align: center;
+      border-radius: 28px 28px 0 0;
+      margin-top: 30px;
+    }
+
+    @media (max-width: 680px) {
+      .hero h2 { font-size: 1.7rem; }
+      .offers-grid { grid-template-columns: 1fr; }
+      .container { padding: 0 18px; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="header">
+  <div class="container logo-bar">
+    <div class="logo-area">
+      <div class="real-logo">
+        <i class="fas fa-gift"></i>
+      </div>
+      <div class="logo-text">
+        <h1>Reward<span>Hub</span></h1>
+        <span>official reward gateway</span>
+      </div>
+    </div>
+    <div class="trust-badge">
+      <i class="fas fa-shield-alt"></i> Trusted by 50k+ members
+    </div>
+  </div>
+</div>
+
+<main class="container">
+  <div class="hero">
+    <h2>🎁 Win exclusive rewards & cash daily</h2>
+    <p>Real verified offers — choose your gift card, cash app deposit or shopping voucher. Limited spots available.</p>
+  </div>
+
+  <!-- REAL REVIEWS SECTION - always changing (dynamic via JavaScript array + setInterval) -->
+  <div class="reviews-section">
+    <div class="section-header">
+      <h3><i class="fas fa-comment-dots" style="color:#2b7a62;"></i> Real-time reviews <span class="live-badge"><i class="fas fa-circle" style="font-size: 8px; margin-right: 4px;"></i> LIVE</span></h3>
+      <span style="font-size: 0.75rem; color:#3b6e8b;">new reviews every few seconds</span>
+    </div>
+    <div id="reviewContainer" class="review-grid">
+      <!-- dynamic reviews injected here -->
+      <div class="review-card">Loading real feedback...</div>
+    </div>
+    <div style="margin-top: 18px; font-size: 0.75rem; text-align: right; color:#5d7f96;">
+      <i class="fab fa-facebook-messenger"></i> verified from recent winners
+    </div>
+  </div>
+
+  <h2 class="offers-title"><i class="fas fa-trophy" style="color:#eab308;"></i> Today's exclusive offers</h2>
+  <div class="offers-grid" id="offersGrid">
+    <!-- offers injected from JS -->
+  </div>
+  <div class="fine-print">
+    ⚡ Limited participation • US only • Terms apply • Rewards subject to availability
+  </div>
+</main>
+
+<footer>
+  <div class="container">
+    <p>&copy; 2025 RewardHub — official partner portal. All logos and trademarks are property of their respective owners.</p>
+    <p style="margin-top: 8px; font-size: 0.75rem;"><i class="fas fa-lock"></i> Secure SSL encrypted offers</p>
+  </div>
+</footer>
+
+<script>
+  // --------------------------------------------------------------
+  // OFFERS DATA (exactly as provided, with original links)
+  // --------------------------------------------------------------
+  const offersData = [
+    { title: "OkWow - CashApp", value: "$850", merchant: "CashApp", link: "https://www.af9m8trk.com/J6H116EG/5JY122KX/?s1=Divet" },
+    { title: "RewardZinga - CashApp", value: "$1,000", merchant: "CashApp", link: "https://www.af9m8trk.com/J6H116EG/9PC123FX/?s1=Divet" },
+    { title: "My American Prizes", value: "$1,000", merchant: "Amazon", link: "https://www.af9m8trk.com/J6H116EG/TJ2123FW/?s1=Divet" },
+    { title: "OkWow - Walmart", value: "$1,000", merchant: "Walmart", link: "https://www.af9m8trk.com/J6H116EG/T6M12294/?s1=Divet" },
+    { title: "OkWow - Family Dollar", value: "$500", merchant: "Family Dollar", link: "https://www.af9m8trk.com/J6H116EG/TTR12295/?s1=Divet" },
+    { title: "OkWow - American Eagle", value: "$100", merchant: "American Eagle", link: "https://www.af9m8trk.com/J6H116EG/MJP12296/?s1=Divet" },
+    { title: "OkWow - Netflix", value: "$100", merchant: "Netflix", link: "https://www.af9m8trk.com/J6H116EG/KDQ122LY/?s1=Divet" },
+    { title: "OkWow - Royal Cruise", value: "$100", merchant: "Royal Cruise", link: "https://www.af9m8trk.com/J6H116EG/R98122L2/?s1=Divet" },
+    { title: "OkWow - Costco", value: "$100", merchant: "Costco", link: "https://www.af9m8trk.com/J6H116EG/3A9122KV/?s1=Divet" },
+    { title: "OkWow - Aldi", value: "$100", merchant: "Aldi", link: "https://www.af9m8trk.com/J6H116EG/GDZ122L3/?s1=Divet" },
+    { title: "UpLevelRewards", value: "$1,000", merchant: "Cash Deposit", link: "https://www.af9m8trk.com/J6H116EG/4K1123XK/?s2=Divet" },
+    { title: "OkWow - CashApp", value: "$650", merchant: "CashApp", link: "https://www.af9m8trk.com/J6H116EG/3AF122KW/?s2=Divet" },
+    { title: "UpLevelRewards - Target", value: "$750", merchant: "Target", link: "https://www.af9m8trk.com/J6H116EG/HMG123XJ/?s1=Divet" }
+  ];
+
+  // generate offer cards HTML
+  function renderOffers() {
+    const grid = document.getElementById('offersGrid');
+    if (!grid) return;
+    grid.innerHTML = '';
+    offersData.forEach(offer => {
+      const card = document.createElement('div');
+      card.className = 'offer-card';
+      card.innerHTML = `
+        <div class="offer-brand">
+          <span class="brand-icon"><i class="fas fa-tag"></i> ${offer.merchant}</span>
+          <i class="fas fa-chevron-right" style="color:#aaa;"></i>
+        </div>
+        <div class="prize">${offer.value} <small>value</small></div>
+        <div class="offer-desc">${offer.title} — claim instantly via secure link</div>
+        <a href="${offer.link}" target="_blank" rel="noopener noreferrer" class="claim-btn">Claim Now →</a>
+      `;
+      grid.appendChild(card);
+    });
+  }
+
+  // ---------- REAL REVIEWS (always changing, rotating review pool) ----------
+  // base pool of authentic-style reviews, each with random timestamp and username
+  const reviewPool = [
+    { name: "Mia Thompson", location: "Austin, TX", text: "I just got the $850 CashApp reward within 2 hours! Absolutely legit, didn't believe at first but funds cleared.", stars: 5, verified: true },
+    { name: "James Carter", location: "Orlando, FL", text: "Used the Walmart $1,000 offer and received my eGift code instantly after completing steps. 10/10 recommend.", stars: 5, verified: true },
+    { name: "Lina Zhang", location: "San Jose, CA", text: "OkWow Netflix $100 works perfectly! Got my code in email. Super happy.", stars: 4, verified: true },
+    { name: "David Kim", location: "Chicago, IL", text: "RewardZinga gave me $1000 direct deposit. Process was simple, had to verify email but smooth overall.", stars: 5, verified: true },
+    { name: "Sophia Rodriguez", location: "Miami, FL", text: "My American Prizes Amazon card arrived after survey. Took 1 day but yes $1000 real!", stars: 4, verified: true },
+    { name: "Oliver Chen", location: "Seattle, WA", text: "Claimed the Family Dollar $500 and used it yesterday. No issues. Trustworthy!", stars: 5, verified: true },
+    { name: "Emma Watson", location: "Denver, CO", text: "I was skeptical about Royal Cruise $100 but actually got a voucher. Nice surprise!", stars: 4, verified: true },
+    { name: "Liam O'Brien", location: "Boston, MA", text: "UpLevelRewards target $750 came through! I've already done 2 offers with RewardHub.", stars: 5, verified: true },
+    { name: "Natalie Pierce", location: "Atlanta, GA", text: "OkWow Costco gift card $100 legit! Redeemed in store.", stars: 5, verified: true },
+    { name: "Carlos Mendez", location: "Phoenix, AZ", text: "CashApp $650 from OkWow deposited fast. New favorite site.", stars: 5, verified: true },
+    { name: "Aisha Johnson", location: "Brooklyn, NY", text: "Aldi $100 worked, got the digital card within 20min. Amazing experience.", stars: 5, verified: true },
+    { name: "Ethan Wright", location: "Portland, OR", text: "I completed two offers already. Real payouts. Highly recommend the American Eagle one!", stars: 4, verified: true }
+  ];
+
+  // function to get random reviews but ensure that reviews seem "always changing"
+  // We will generate a set of 4 unique reviews every 5 seconds (but shuffle fresh)
+  let reviewInterval;
+
+  function getRandomReviews(count = 4) {
+    // Shuffle copy of pool and pick first 'count'
+    const shuffled = [...reviewPool];
+    for (let i = shuffled.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    }
+    return shuffled.slice(0, count);
+  }
+
+  // helper to generate star html
+  function renderStars(starCount) {
+    let starsHtml = '';
+    for (let i = 0; i < 5; i++) {
+      if (i < starCount) starsHtml += '<i class="fas fa-star"></i>';
+      else starsHtml += '<i class="far fa-star"></i>';
+    }
+    return starsHtml;
+  }
+
+  function updateReviewFeed() {
+    const container = document.getElementById('reviewContainer');
+    if (!container) return;
+    const freshReviews = getRandomReviews(4);
+    // generate new review cards with subtle time-based messages to feel "real time"
+    const now = new Date();
+    const timeStr = now.toLocaleTimeString([], { hour: '2-digit', minute:'2-digit' });
+    
+    container.innerHTML = '';
+    freshReviews.forEach((rev, idx) => {
+      const reviewDiv = document.createElement('div');
+      reviewDiv.className = 'review-card';
+      const initials = rev.name.split(' ').map(n => n[0]).join('');
+      const avatarColor = ['#E6F0FA', '#FFE8E0', '#E0F2E9', '#FEF2E0'][idx % 4];
+      reviewDiv.innerHTML = `
+        <div class="review-header">
+          <div class="avatar" style="background: ${avatarColor};">${initials}</div>
+          <div>
+            <div class="reviewer">${rev.name} <span style="font-size:0.7rem; color:#557c8c;">• ${rev.location}</span></div>
+            <div class="stars">${renderStars(rev.stars)}</div>
+          </div>
+        </div>
+        <div class="review-text">"${rev.text}"</div>
+        <div class="verified"><i class="fas fa-check-circle"></i> Verified winner · ${timeStr}</div>
+      `;
+      container.appendChild(reviewDiv);
+    });
+    // add a small random "new review" indicator blink optional
+  }
+
+  // Auto-update reviews every 8 seconds to keep always changing
+  function startLiveReviews() {
+    updateReviewFeed(); // initial load
+    if (reviewInterval) clearInterval(reviewInterval);
+    reviewInterval = setInterval(() => {
+      updateReviewFeed();
+    }, 8000);
+  }
+
+  // additional hover micro-interaction: offer buttons open new tab safely
+  // also for dynamic content we have links already
+
+  // Bonus: custom real logo is already placed above, we also embed a "real logo" area with icon.
+  // Ensure all external links have target="_blank" and rel
+  // Force open all claim links securely
+  function bindLinkSafety() {
+    // No need, all <a> already have target blank via renderOffers.
+    // For any dynamic future: done
+  }
+
+  // additional feature: "Today's stats" via console only but not needed.
+
+  // run on load
+  document.addEventListener('DOMContentLoaded', () => {
+    renderOffers();
+    startLiveReviews();
+    bindLinkSafety();
+
+    // optional: add a little footer effect that reviews updates count
+    const reviewContainer = document.getElementById('reviewContainer');
+    if (reviewContainer) {
+      const observer = new MutationObserver(() => {
+        // just subtle visual hint: nothing invasive
+      });
+      observer.observe(reviewContainer, { childList: true });
+    }
+  });
+
+  // keep the "real reviews always changing" Promise that they will see new reviews every few seconds.
+  // Also we can manually mix some additional random message for variation.
+  // for further realism, occasional new messages appended but we replace with fresh set completely.
+  // That shows dynamic changes.
+</script>
+
+<!-- internal note: "own real logo" present in header (RewardHub icon + gradient).
+     Live reviews always changing via setInterval -->
+</body>
+</html>
